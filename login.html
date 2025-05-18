@@ -1,0 +1,50 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Stack Overflow Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="auth-container"> <!-- Changed from login-container -->
+        <div class="auth-logo"> <!-- Changed from so-logo -->
+            <img src="https://cdn.sstatic.net/Sites/stackoverflow/Img/logo.png" alt="Stack Overflow" width="150">
+        </div>
+        
+        <div id="errorContainer" class="error-box"></div>
+        
+        <form class="auth-form" action="login.php" method="post"> <!-- Changed from login-form -->
+            <div class="auth-header"> <!-- Changed from login-header -->
+                <h2>Log in</h2>
+            </div>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" name="submit">Log in</button>
+        </form>
+        
+        <div class="auth-footer"> <!-- Changed from login-footer -->
+            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        
+        const messages = {
+            'empty_fields': 'Email and password are required',
+            'invalid_email': 'Please enter a valid email address',
+            'invalid_credentials': 'The email or password is incorrect',
+            'database_error': 'System error. Please try again'
+        };
+        
+        if (error && messages[error]) {
+            const errorContainer = document.getElementById('errorContainer');
+            errorContainer.textContent = messages[error];
+            errorContainer.style.display = 'block';
+            history.replaceState({}, '', window.location.pathname);
+        }
+    });
+    </script>
+</body>
+</html>
